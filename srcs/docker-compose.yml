@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: requirements/nginx/
+    container_name: nginx
+    ports:
+      - 443:443
+    volumes:
+      - "/home/oaizab/data/website:/var/www/html"
+    networks:
+      - frontend
+    restart: always
+
+networks:
+  frontend:
+  backend:
