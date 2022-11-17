@@ -11,6 +11,22 @@ services:
     networks:
       - frontend
     restart: always
+  
+  mariadb:
+    build: requirements/mariadb/
+    container_name: mariadb
+    volumes:
+      - "/home/oaizab/data/mariadb:/var/lib/mysql"
+    ports:
+      - 3306:3306
+    networks:
+      - backend
+    restart: always
+    environment:
+      MYSQL_ROOT_PWD:   ${MYSQL_ROOT_PWD}
+      WP_DATABASE_NAME: ${WP_DATABASE_NAME}
+      WP_DATABASE_USR:  ${WP_DATABASE_USR}
+      WP_DATABASE_PWD:  ${WP_DATABASE_PWD}
 
 networks:
   frontend:

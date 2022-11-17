@@ -8,7 +8,7 @@ clean: stop
 	docker system prune -af
 
 fclean: clean
-	rm -rf /home/oaizab/data
+	sudo rm -rf /home/oaizab/data
 
 prune: stop
 	docker system prune -f

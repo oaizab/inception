@@ -10,7 +10,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-subj "/C=MA/ST=Khouribga/L=Khouribga/O=1337 School/OU=oaizab/CN=oaizab"
 
 # configure nginx
-RUN mkdir -p /run/nginx
+# RUN mkdir -p /run/nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
 
 # start nginx
