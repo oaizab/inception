@@ -4,6 +4,9 @@ all: prune reload
 stop:
 	docker compose -f srcs/docker-compose.yml down
 
+up:
+	docker compose -f srcs/docker-compose.yml up -d
+
 clean: stop
 	docker system prune -af
 
@@ -15,5 +18,7 @@ prune: stop
 
 reload:
 	docker compose -f srcs/docker-compose.yml up -d --build
+
+re: fclean all
 
 .PHONY: stop clean fclean prune reload all
