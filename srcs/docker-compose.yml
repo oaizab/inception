@@ -60,3 +60,20 @@ services:
 networks:
   frontend:
   backend:
+
+volumes:
+  mariadb:
+    driver: local
+    name: mariadb
+    driver_opts:
+      type: none
+      device: /home/oaizab/data/mariadb
+      o: bind
+  
+  website:
+    driver: local
+    name: website
+    driver_opts:
+      type: none
+      device: /home/oaizab/data/website
+      o: bind
