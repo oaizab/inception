@@ -23,6 +23,7 @@ services:
       - "/home/oaizab/data/website:/var/www/html"
     depends_on:
       - mariadb
+      - redis
     networks:
       - frontend
       - backend
@@ -40,6 +41,7 @@ services:
       WP_USR:           ${WP_USR}
       WP_PWD:           ${WP_PWD}
       WP_EMAIL:         ${WP_EMAIL}
+      REDIS_HOST:       ${REDIS_HOST}
 
   mariadb:
     build: requirements/mariadb/
@@ -56,6 +58,28 @@ services:
       WP_DATABASE_NAME: ${WP_DATABASE_NAME}
       WP_DATABASE_USR:  ${WP_DATABASE_USR}
       WP_DATABASE_PWD:  ${WP_DATABASE_PWD}
+  
+  redis:
+    build: requirements/bonus/redis/
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+    restart: always
+  
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    security_opt:
+      - no-new-privileges:true
+    restart: always
 
 networks:
   frontend:
