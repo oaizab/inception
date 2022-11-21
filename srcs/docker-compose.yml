@@ -68,35 +68,35 @@ services:
       - backend
     restart: always
   
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
+  cadvisor:
+    build: requirements/bonus/cadvisor/
+    container_name: cadvisor
     ports:
-      - "8000:8000"
-      - "9443:9443"
+      - 8080:8080
+    networks:
+      - backend
+      - frontend
     volumes:
-      - "/etc/localtime:/etc/localtime:ro"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "/home/oaizab/data/portainer:/data"
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:rw"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
     restart: always
+
+  # portainer:
+  #   image: portainer/portainer-ce:latest
+  #   container_name: portainer
+  #   ports:
+  #     - "8000:8000"
+  #     - "9443:9443"
+  #   volumes:
+  #     - "/etc/localtime:/etc/localtime:ro"
+  #     - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  #     - "/home/oaizab/data/portainer:/data"
+  #   restart: always
 
 networks:
   frontend:
   backend:
 
-volumes:
-  mariadb:
-    driver: local
-    name: mariadb
-    driver_opts:
-      type: none
-      device: /home/oaizab/data/mariadb
-      o: bind
-  
-  website:
-    driver: local
-    name: website
-    driver_opts:
-      type: none
-      device: /home/oaizab/data/website
-      o: bind
