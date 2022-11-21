@@ -11,6 +11,7 @@ done
 if [ ! -f "/var/www/html/index.html" ]; then
 	# static website
 	mv /tmp/index.html /var/www/html/index.html
+	mv /tmp/style.css /var/www/html/style.css
 
 	# setup adminer
 	wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql-en.php -O /var/www/html/adminer.php &> /dev/null
