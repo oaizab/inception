@@ -67,6 +67,21 @@ services:
     networks:
       - backend
     restart: always
+
+  ftp-server:
+    build: requirements/bonus/ftp-server/
+    container_name: ftp-server
+    ports:
+      - "21:21"
+      - "21100-21110:21100-21110"
+    volumes:
+      - "/home/oaizab/data/website:/var/www/html"
+    networks:
+      - backend
+    restart: always
+    environment:
+      FTP_USR: ${FTP_USR}
+      FTP_PWD: ${FTP_PWD}
   
   cadvisor:
     build: requirements/bonus/cadvisor/
