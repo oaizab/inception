@@ -77,8 +77,7 @@ services:
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    security_opt:
-      - no-new-privileges:true
+      - "/home/oaizab/data/portainer:/data"
     restart: always
 
 networks:
