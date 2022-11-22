@@ -1,19 +1,5 @@
 version: '3.8'
 
-volumes:
-  mariadbdata:
-    driver: local
-    driver_opts:
-      type: none
-      device: "/home/oaizab/data/mariadb"
-      o: bind
-  wordpressdata:
-    driver: local
-    driver_opts:
-      type: none
-      device: "/home/oaizab/data/website"
-      o: bind
-
 services:
   nginx:
     build: requirements/nginx/
@@ -129,4 +115,17 @@ networks:
   frontend:
   backend:
 
+volumes:
+  mariadbdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/home/oaizab/data/mariadb"
+      o: bind
+  wordpressdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/home/oaizab/data/website"
+      o: bind
 
