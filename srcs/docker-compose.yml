@@ -1,5 +1,19 @@
 version: '3.8'
 
+volumes:
+  mariadbdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/home/oaizab/data/mariadb"
+      o: bind
+  wordpressdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/home/oaizab/data/website"
+      o: bind
+
 services:
   nginx:
     build: requirements/nginx/
@@ -7,7 +21,7 @@ services:
     ports:
       - 443:443
     volumes:
-      - "/home/oaizab/data/website:/var/www/html"
+      - "wordpressdata:/var/www/html"
     depends_on:
       - wordpress
     networks:
@@ -20,7 +34,7 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - "/home/oaizab/data/website:/var/www/html"
+      - "wordpressdata:/var/www/html"
     depends_on:
       - mariadb
       - redis
@@ -47,7 +61,7 @@ services:
     build: requirements/mariadb/
     container_name: mariadb
     volumes:
-      - "/home/oaizab/data/mariadb:/var/lib/mysql"
+      - "mariadbdata:/var/lib/mysql"
     ports:
       - 3306:3306
     networks:
@@ -75,7 +89,7 @@ services:
       - "21:21"
       - "21100-21110:21100-21110"
     volumes:
-      - "/home/oaizab/data/website:/var/www/html"
+      - "wordpressdata:/var/www/html"
     networks:
       - backend
     restart: always
@@ -114,4 +128,5 @@ services:
 networks:
   frontend:
   backend:
+
 

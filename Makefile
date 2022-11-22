@@ -1,10 +1,14 @@
 
 all: prune reload
 
+create:
+	@mkdir -p /home/oaizab/data/mariadb
+	@mkdir -p /home/oaizab/data/website
+
 stop:
 	docker-compose -f srcs/docker-compose.yml down
 
-up:
+up: create
 	docker-compose -f srcs/docker-compose.yml up -d
 
 clean: stop
@@ -16,7 +20,7 @@ fclean: clean
 prune: stop
 	docker system prune -f
 
-reload:
+reload: create
 	docker-compose -f srcs/docker-compose.yml up -d --build
 
 re: fclean all
