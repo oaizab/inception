@@ -99,17 +99,17 @@ services:
       - "/dev/disk/:/dev/disk:ro"
     restart: always
 
-  # portainer:
-  #   image: portainer/portainer-ce:latest
-  #   container_name: portainer
-  #   ports:
-  #     - "8000:8000"
-  #     - "9443:9443"
-  #   volumes:
-  #     - "/etc/localtime:/etc/localtime:ro"
-  #     - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  #     - "/home/oaizab/data/portainer:/data"
-  #   restart: always
+  portainer:
+    build: requirements/bonus/portainer/
+    container_name: portainer
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/home/oaizab/data/portainer:/data"
+    restart: always
 
 networks:
   frontend:

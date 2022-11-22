@@ -2,10 +2,10 @@
 all: prune reload
 
 stop:
-	docker compose -f srcs/docker-compose.yml down
+	docker-compose -f srcs/docker-compose.yml down
 
 up:
-	docker compose -f srcs/docker-compose.yml up -d
+	docker-compose -f srcs/docker-compose.yml up -d
 
 clean: stop
 	docker system prune -af
@@ -17,7 +17,7 @@ prune: stop
 	docker system prune -f
 
 reload:
-	docker compose -f srcs/docker-compose.yml up -d --build
+	docker-compose -f srcs/docker-compose.yml up -d --build
 
 re: fclean all
 
